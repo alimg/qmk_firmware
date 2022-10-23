@@ -38,6 +38,13 @@
 extern keymap_config_t keymap_config;
 #endif
 
+#ifdef BLUETOOTH_ENABLE
+#    include "outputselect.h"
+#    ifdef BLUETOOTH_ITON_BT
+#        include "iton_bt.h"
+#    endif
+#endif
+
 /* ---------------------------------------------------------
  *       Global interface variables and declarations
  * ---------------------------------------------------------
@@ -398,6 +405,13 @@ __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
 
 /* LED status */
 uint8_t keyboard_leds(void) {
+#ifdef BLUETOOTH_ENABLE
+    if (where_to_send() == OUTPUT_BLUETOOTH) {
+#    ifdef BLUETOOTH_ITON_BT
+        return iton_bt_led_state;
+#    endif
+    }
+#endif
     return keyboard_led_state;
 }
 
@@ -490,6 +504,36 @@ void send_mouse(report_mouse_t *report) {
 void send_extra(report_extra_t *report) {
 #ifdef EXTRAKEY_ENABLE
     send_report(USB_ENDPOINT_IN_SHARED, report, sizeof(report_extra_t));
+#endif
+}
+
+void send_system(uint16_t data) {
+#ifdef BLUETOOTH_ENABLE
+    if (where_to_send() == OUTPUT_BLUETOOTH) {
+#    ifdef BLUETOOTH_ITON_BT
+        iton_bt_report_system(data);
+#    endif
+        return;
+    }
+#endif
+
+#ifdef EXTRAKEY_ENABLE
+    send_extra(REPORT_ID_SYSTEM, data);
+#endif
+}
+
+void send_consumer(uint16_t data) {
+#ifdef BLUETOOTH_ENABLE
+    if (where_to_send() == OUTPUT_BLUETOOTH) {
+#    ifdef BLUETOOTH_ITON_BT
+        iton_bt_report_media(data);
+#    endif
+        return;
+    }
+#endif
+
+#ifdef EXTRAKEY_ENABLE
+    send_extra(REPORT_ID_CONSUMER, data);
 #endif
 }
 
