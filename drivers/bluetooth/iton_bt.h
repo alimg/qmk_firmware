@@ -52,18 +52,18 @@ enum iton_bt_notification_type {
 
 enum iton_bt_notification_param {
     // notif_battery
-    batt_voltage_low    =0x06,
-    batt_exit_low_battery_mode = 0x0A,
+    batt_voltage_low            = 0x06,
+    batt_exit_low_battery_mode  = 0x0A,
     batt_low_power_shutdown     = 0x07,
 
-    query_working_mode      = 0xA0,
-    query_bt_name           = 0xA1,
+    query_working_mode          = 0xA0,
+    query_bt_name               = 0xA1,
 
     // notif_bluetooth
-    bt_connection_success   = 0x76,
-    bt_entered_pairing      = 0x77,
-    bt_disconected          = 0x78,
-    bt_enters_connection    = 0x79,
+    bt_connection_success       = 0x76,
+    bt_entered_pairing          = 0x77,
+    bt_disconected              = 0x78,
+    bt_enters_connection        = 0x79,
 };
 
 /**
