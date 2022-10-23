@@ -507,36 +507,6 @@ void send_extra(report_extra_t *report) {
 #endif
 }
 
-void send_system(uint16_t data) {
-#ifdef BLUETOOTH_ENABLE
-    if (where_to_send() == OUTPUT_BLUETOOTH) {
-#    ifdef BLUETOOTH_ITON_BT
-        iton_bt_report_system(data);
-#    endif
-        return;
-    }
-#endif
-
-#ifdef EXTRAKEY_ENABLE
-    send_extra(REPORT_ID_SYSTEM, data);
-#endif
-}
-
-void send_consumer(uint16_t data) {
-#ifdef BLUETOOTH_ENABLE
-    if (where_to_send() == OUTPUT_BLUETOOTH) {
-#    ifdef BLUETOOTH_ITON_BT
-        iton_bt_report_media(data);
-#    endif
-        return;
-    }
-#endif
-
-#ifdef EXTRAKEY_ENABLE
-    send_extra(REPORT_ID_CONSUMER, data);
-#endif
-}
-
 void send_programmable_button(report_programmable_button_t *report) {
 #ifdef PROGRAMMABLE_BUTTON_ENABLE
     send_report(USB_ENDPOINT_IN_SHARED, report, sizeof(report_programmable_button_t));
