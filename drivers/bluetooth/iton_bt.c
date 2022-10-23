@@ -69,7 +69,7 @@ const SPIConfig iton_bt_spicfg = {
     .slave = true,
     .data_cb = iton_bt_data_cb,
     // mcu specific
-    .ctrl0 = SPI_CTRL0_DL(8),
+    .ctrl0 = (8 << 8), // Data Length = 8
 };
 
 /**
