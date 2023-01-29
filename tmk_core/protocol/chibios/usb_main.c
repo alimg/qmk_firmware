@@ -38,13 +38,6 @@
 extern keymap_config_t keymap_config;
 #endif
 
-#ifdef BLUETOOTH_ENABLE
-#    include "outputselect.h"
-#    ifdef BLUETOOTH_ITON_BT
-#        include "iton_bt.h"
-#    endif
-#endif
-
 /* ---------------------------------------------------------
  *       Global interface variables and declarations
  * ---------------------------------------------------------
@@ -405,13 +398,6 @@ __attribute__((weak)) void restart_usb_driver(USBDriver *usbp) {
 
 /* LED status */
 uint8_t keyboard_leds(void) {
-#ifdef BLUETOOTH_ENABLE
-    if (where_to_send() == OUTPUT_BLUETOOTH) {
-#    ifdef BLUETOOTH_ITON_BT
-        return iton_bt_led_state;
-#    endif
-    }
-#endif
     return keyboard_led_state;
 }
 
