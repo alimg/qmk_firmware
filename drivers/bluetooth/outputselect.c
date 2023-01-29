@@ -55,6 +55,12 @@ uint8_t auto_detect_output(void) {
     }
 #endif
 
+#ifdef BLUETOOTH_ITON_BT
+    if (iton_bt_is_connected) {
+        return OUTPUT_BLUETOOTH;
+    }
+#endif
+
 #ifdef BLUETOOTH_ENABLE
     return OUTPUT_BLUETOOTH; // should check if BT is connected here
 #endif
