@@ -63,7 +63,6 @@ uint8_t host_keyboard_leds(void) {
 #ifdef SPLIT_KEYBOARD
     if (!is_keyboard_master()) return split_led_state;
 #endif
-
     if (!driver) return 0;
     return (*driver->keyboard_leds)();
 }
