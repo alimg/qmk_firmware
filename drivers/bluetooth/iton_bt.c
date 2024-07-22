@@ -19,12 +19,6 @@
 #    define ITON_BT_INT_LINE A1
 #endif
 
-#ifdef KEYBOARD_SHARED_EP
-#    define HID_REPORT_OFFSET 1
-#else
-#    define HID_REPORT_OFFSET 0
-#endif
-
 #ifndef ITON_BT_BUFFER_LEN
 #    define ITON_BT_BUFFER_LEN 16
 #endif
@@ -247,5 +241,5 @@ void iton_bt_send_keyboard(report_keyboard_t *report) {
         return iton_bt_send(report_nkro, &nkro_report[0], 15);
     }
 
-    iton_bt_send(report_hid, &report->raw[HID_REPORT_OFFSET], 8);
+    iton_bt_send(report_hid, &report->mods, 8);
 }
