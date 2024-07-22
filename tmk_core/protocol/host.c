@@ -64,12 +64,6 @@ uint8_t host_keyboard_leds(void) {
     if (!is_keyboard_master()) return split_led_state;
 #endif
 
-#ifdef BLUETOOTH_ENABLE
-    if (where_to_send() == OUTPUT_BLUETOOTH) {
-        return bluetooth_led_state();
-    }
-#endif
-
     if (!driver) return 0;
     return (*driver->keyboard_leds)();
 }
@@ -139,13 +133,6 @@ void host_mouse_send(report_mouse_t *report) {
 void host_system_send(uint16_t usage) {
     if (usage == last_system_usage) return;
     last_system_usage = usage;
-
-#ifdef BLUETOOTH_ENABLE
-    if (where_to_send() == OUTPUT_BLUETOOTH) {
-        bluetooth_send_system(usage);
-        return;
-    }
-#endif
 
     if (!driver) return;
 
