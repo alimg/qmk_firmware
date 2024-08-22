@@ -18,7 +18,5 @@
 
 #pragma once
 #define SN32_RGB_MATRIX_ROW_PINS { C3, C1, C0, C6, C5, C4, C9, C8, C7, C12, C11, C10, B13, C14, C13, B14, B15, D3 }
-// found these pins by trial and error, one of them might be bluetooth switch...
-#define DIP_SWITCH_PINS { D5, D6 }
 #define VIA_QMK_RGBLIGHT_ENABLE
 #define ITON_BT_ENABLE_ACK
