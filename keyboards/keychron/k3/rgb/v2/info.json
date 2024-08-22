@@ -19,9 +19,9 @@
     "bootmagic": true,
     "command": false,
     "console": false,
-    "extrakey": true,
+    "extrakey": false,
     "mousekey": false,
-    "nkro": true,
+    "nkro": false,
     "dip_switch": true
   },
   "processor": "SN32F248BF",
@@ -31,7 +31,10 @@
     "caps_lock": "D4",
     "on_state": 1
   },
-  
+  "dip_switch": {
+    "pins": ["D5", "D6"]
+  },
+
   "layouts": {
     "LAYOUT_75_iso": {
       "layout": [

@@ -23,8 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // entirely and just use numbers.
 enum layer_names {
   MAC_BASE = 0,
-  WIN_BASE,
   MAC_FN,
+  WIN_BASE,
   WIN_FN
 };
 

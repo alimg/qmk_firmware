@@ -16,6 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef BLUETOOTH_ENABLE
 #    include "iton_bt.h"
 #    include "outputselect.h"
+#include "print.h"
 
 uint32_t last_update_time = 0;
 
@@ -66,24 +67,30 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     if (bluetooth_dip_switch && record->event.pressed) {
         switch (keycode) {
             case BT_PROFILE1:
+                uprintf("bt1\n\r");
                 iton_bt_switch_profile(0);
                 bt_profile = 0;
                 break;
             case BT_PROFILE2:
+                uprintf("bt2\n\r");
                 iton_bt_switch_profile(1);
                 bt_profile = 1;
                 break;
             case BT_PROFILE3:
+                uprintf("bt3\n\r");
                 iton_bt_switch_profile(2);
                 bt_profile = 2;
                 break;
             case BT_PAIR:
+                uprintf("btp\n\r");
                 iton_bt_enter_pairing();
                 break;
             case BT_RESET:
+                uprintf("btr\n\r");
                 iton_bt_reset_pairing();
                 break;
             case BT_BATTERY:
+                uprintf("btb\n\r");
                 iton_bt_query_battery_level();
                 break;
             default:
@@ -120,7 +127,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     last_update_time = current_time;
 
     if (ev_connected > 0 && elapsed < ev_connected) {
-        uint8_t profile_index = 16 + bt_profile;
+        uint8_t profile_index = 16 + 1 + bt_profile;
         if ((ev_connected / 250) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_GREEN);
         } else {
@@ -130,7 +137,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 
     if (ev_connecting > 0) {
-        uint8_t profile_index = 16 + bt_profile;
+        uint8_t profile_index = 16 + 1 + bt_profile;
         if ((current_time / 125) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_YELLOW);
         } else {
@@ -139,7 +146,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 
     if (ev_pairing > 0) {
-        uint8_t profile_index = 16 + bt_profile;
+        uint8_t profile_index = 16 + 1 + bt_profile;
         if ((current_time / 62) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_BLUE);
         } else {
@@ -148,7 +155,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 
     if (ev_disconnected > 0 && elapsed < ev_disconnected) {
-        uint8_t profile_index = 16 + bt_profile;
+        uint8_t profile_index = 16 + 1 + bt_profile;
         if ((ev_disconnected / 250) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_RED);
         } else {
@@ -186,20 +193,27 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
 bool dip_switch_update_user(uint8_t index, bool active) {
     switch (index) {
-        case 1:
+        case 1: 
+            // D6 pin is the OS switch  
             if (active) {
                 layer_move(MAC_BASE);
             } else {
                 layer_move(WIN_BASE);
             }
             break;
-#ifdef BLUETOOTH_ENABLE
-        case 0:
-            // dip switch inactive in bt state
-            bluetooth_dip_switch = !active;
-            break;
-#endif
     }
+    return true;
+}
+
+bool dip_switch_update_mask_user(uint32_t state) {
+#ifdef BLUETOOTH_ENABLE
+    // The bt state seems to have a cold start problem on this model, because
+    // Cable/Bluetooth switch has an power-off state in the middle.
+    // Hence the dip_switch_update_mask_user workaround.
+    
+    // D5 is the Cable/BT switch
+    bluetooth_dip_switch = (state & 1) == 0;
+#endif
     return true;
 }
 
@@ -226,8 +240,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void keyboard_post_init_user(void) {
     // Customise these values to desired behaviour
-    // debug_enable = true;
-    // debug_matrix   = true;
-    // debug_keyboard = true;
+    debug_enable = true;
+    //debug_matrix   = true;
+    debug_keyboard = true;
     // debug_mouse=true;
 }

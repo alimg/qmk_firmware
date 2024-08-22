@@ -59,7 +59,7 @@ uint8_t iton_bt_send_kb_last_key = 0x00;
 const SPIConfig iton_bt_spicfg = {
     .slave = true,
     .data_cb = iton_bt_data_cb,
-#if defined(SN32)
+#if defined(MCU_SN32)
     .ctrl0 = SPI_DATA_LENGTH(8),
 #endif
 };
