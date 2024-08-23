@@ -16,7 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef BLUETOOTH_ENABLE
 #    include "iton_bt.h"
 #    include "outputselect.h"
-#include "print.h"
 
 uint32_t last_update_time = 0;
 
@@ -67,30 +66,24 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     if (bluetooth_dip_switch && record->event.pressed) {
         switch (keycode) {
             case BT_PROFILE1:
-                uprintf("bt1\n\r");
                 iton_bt_switch_profile(0);
                 bt_profile = 0;
                 break;
             case BT_PROFILE2:
-                uprintf("bt2\n\r");
                 iton_bt_switch_profile(1);
                 bt_profile = 1;
                 break;
             case BT_PROFILE3:
-                uprintf("bt3\n\r");
                 iton_bt_switch_profile(2);
                 bt_profile = 2;
                 break;
             case BT_PAIR:
-                uprintf("btp\n\r");
                 iton_bt_enter_pairing();
                 break;
             case BT_RESET:
-                uprintf("btr\n\r");
                 iton_bt_reset_pairing();
                 break;
             case BT_BATTERY:
-                uprintf("btb\n\r");
                 iton_bt_query_battery_level();
                 break;
             default:
@@ -240,8 +233,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void keyboard_post_init_user(void) {
     // Customise these values to desired behaviour
-    debug_enable = true;
-    //debug_matrix   = true;
-    debug_keyboard = true;
+    // debug_enable = true;
+    // debug_matrix   = true;
+    // debug_keyboard = true;
     // debug_mouse=true;
 }
