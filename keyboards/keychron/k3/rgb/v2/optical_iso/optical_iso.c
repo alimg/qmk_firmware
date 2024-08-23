@@ -35,18 +35,21 @@ void iton_bt_connection_successful() {
     ev_connected  = 1500;
     ev_pairing    = 0;
     ev_connecting = 0;
+    ev_disconnected = 0;
 }
 
 void iton_bt_entered_pairing() {
     ev_pairing    = 1;
     ev_connected  = 0;
     ev_connecting = 0;
+    ev_disconnected = 0;
 }
 
 void iton_bt_enters_connection_state() {
     ev_connecting = 1;
     ev_connected  = 0;
     ev_pairing    = 0;
+    ev_disconnected = 0;
 }
 
 void iton_bt_disconnected() {
