@@ -19,9 +19,9 @@
     "bootmagic": true,
     "command": false,
     "console": false,
-    "extrakey": false,
+    "extrakey": true,
     "mousekey": false,
-    "nkro": false,
+    "nkro": true,
     "dip_switch": true
   },
   "processor": "SN32F248BF",
