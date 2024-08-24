@@ -53,7 +53,7 @@ void iton_bt_enters_connection_state() {
 }
 
 void iton_bt_disconnected() {
-    set_output(OUTPUT_USB);
+    // set_output(OUTPUT_USB);
     ev_disconnected = 1500;
     ev_connected    = 0;
     ev_pairing      = 0;
@@ -197,21 +197,14 @@ bool dip_switch_update_user(uint8_t index, bool active) {
                 layer_move(WIN_BASE);
             }
             break;
+        case 0:
+            #ifdef BLUETOOTH_ENABLE
+            bluetooth_dip_switch = !active;
+            #endif
     }
     return true;
 }
 
-bool dip_switch_update_mask_user(uint32_t state) {
-#ifdef BLUETOOTH_ENABLE
-    // The bt state seems to have a cold start problem on this model, because
-    // Cable/Bluetooth switch has an power-off state in the middle.
-    // Hence the dip_switch_update_mask_user workaround.
-    
-    // D5 is the Cable/BT switch
-    bluetooth_dip_switch = (state & 1) == 0;
-#endif
-    return true;
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
