@@ -122,7 +122,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // Update the last update time for the next call
     last_update_time = current_time;
 
-    if (ev_connected > 0 && elapsed < ev_connected) {
+    if (ev_connected > 0 && elapsed <= ev_connected) {
         uint8_t profile_index = 16 + 1 + bt_profile;
         if ((ev_connected / 250) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_GREEN);
@@ -150,7 +150,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
 
-    if (ev_disconnected > 0 && elapsed < ev_disconnected) {
+    if (ev_disconnected > 0 && elapsed <= ev_disconnected) {
         uint8_t profile_index = 16 + 1 + bt_profile;
         if ((ev_disconnected / 250) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_RED);
@@ -160,7 +160,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         ev_disconnected -= elapsed;
     }
 
-    if (ev_battery_level > 0 && elapsed < ev_battery_level) {
+    if (ev_battery_level > 0 && elapsed <= ev_battery_level) {
         ev_battery_level -= elapsed;
         int total_leds       = MATRIX_ROWS * MATRIX_COLS;
         int leds_per_section = total_leds / 4;
