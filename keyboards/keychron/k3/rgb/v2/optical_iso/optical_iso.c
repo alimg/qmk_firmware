@@ -30,6 +30,15 @@ uint32_t bt_profile    = 0;
 
 bool bluetooth_dip_switch = false;
 
+void matrix_output_select_delay(void) {
+    waitInputPinDelay();
+    if (bluetooth_dip_switch) {
+        waitInputPinDelay();
+        waitInputPinDelay();
+        waitInputPinDelay();
+    }
+}
+
 void iton_bt_connection_successful() {
     set_output(OUTPUT_BLUETOOTH);
     ev_connected  = 1500;
@@ -64,8 +73,9 @@ void iton_bt_battery_level(uint8_t level) {
     battery_level    = level;
     ev_battery_level = 1500;
 }
-
+#include "print.h"
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
+    uprintf("iton rx counter: %ld\r\n", iton_rx_counter);
     if (bluetooth_dip_switch && record->event.pressed) {
         switch (keycode) {
             case BT_PROFILE1:

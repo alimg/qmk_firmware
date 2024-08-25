@@ -199,9 +199,6 @@ static void shared_matrix_scan_keys(matrix_row_t current_matrix[], uint8_t curre
             }
         }
         if (matrix_locked) {
-            matrix_output_select_delay();
-            matrix_output_select_delay();
-            matrix_output_select_delay();
 #if (DIODE_DIRECTION == COL2ROW)
 #    if (SN32_PWM_DIRECTION == DIODE_DIRECTION)
             matrix_read_cols_on_row(current_matrix, current_key);

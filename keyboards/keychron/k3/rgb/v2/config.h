@@ -22,6 +22,6 @@
 #define ITON_BT_ENABLE_ACK
 
 
-#define RGB_MATRIX_SAT_STEP 8
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // higher values cause unstability, especially when bluetooth is enabled
-#define MATRIX_IO_DELAY 120
+//#define RGB_MATRIX_SAT_STEP 8
+//#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // higher values cause unstability, especially when bluetooth is enabled
+//#define MATRIX_IO_DELAY 120
