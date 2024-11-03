@@ -23,4 +23,5 @@
 
 
 #define RGB_MATRIX_SAT_STEP 8
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 64 // higher values cause unstability, especially when bluetooth is enabled
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // higher values cause unstability, especially when bluetooth is enabled
+#define MATRIX_IO_DELAY 120
