@@ -97,7 +97,6 @@ enum iton_bt_notification_param {
 uint8_t iton_bt_led_state;
 #endif
 bool iton_bt_is_connected;
-uint32_t iton_rx_counter;
 
 /**
  * Driver Callbacks

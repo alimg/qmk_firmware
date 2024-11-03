@@ -54,7 +54,6 @@ bool iton_bt_is_connected = false;
 #ifdef ITON_BT_ENABLE_LED_STATE
 uint8_t iton_bt_led_state = 0x00;
 #endif
-uint32_t iton_rx_counter = 0;
 
 static uint8_t iton_bt_buffer[ITON_BT_BUFFER_LEN];
 uint8_t        iton_bt_send_kb_last_key = 0x00;
@@ -166,7 +165,6 @@ static void iton_bt_rx_cb(void *arg) {
                 break;
         }
     }
-    iton_rx_counter ++;
 }
 #endif
 

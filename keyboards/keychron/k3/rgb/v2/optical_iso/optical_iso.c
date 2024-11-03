@@ -32,6 +32,7 @@ bool bluetooth_dip_switch = false;
 
 void matrix_output_select_delay(void) {
     waitInputPinDelay();
+    waitInputPinDelay();
     if (bluetooth_dip_switch) {
         waitInputPinDelay();
         waitInputPinDelay();
@@ -62,7 +63,6 @@ void iton_bt_enters_connection_state() {
 }
 
 void iton_bt_disconnected() {
-    // set_output(OUTPUT_USB);
     ev_disconnected = 1500;
     ev_connected    = 0;
     ev_pairing      = 0;
@@ -73,9 +73,8 @@ void iton_bt_battery_level(uint8_t level) {
     battery_level    = level;
     ev_battery_level = 1500;
 }
-#include "print.h"
+
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-    uprintf("iton rx counter: %ld\r\n", iton_rx_counter);
     if (bluetooth_dip_switch && record->event.pressed) {
         switch (keycode) {
             case BT_PROFILE1:
@@ -132,7 +131,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     // Update the last update time for the next call
     last_update_time = current_time;
 
-    if (ev_connected > 0 && elapsed <= ev_connected) {
+    if (ev_connected > 1 && elapsed < ev_connected) {
         uint8_t profile_index = 16 + 1 + bt_profile;
         if ((ev_connected / 250) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_GREEN);
@@ -160,7 +159,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
 
-    if (ev_disconnected > 0 && elapsed <= ev_disconnected) {
+    if (ev_disconnected > 1 && elapsed < ev_disconnected) {
         uint8_t profile_index = 16 + 1 + bt_profile;
         if ((ev_disconnected / 250) % 2 == 0) {
             rgb_matrix_set_color(profile_index, RGB_RED);
@@ -197,12 +196,19 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return false;
 }
 
+//#include "eeconfig.h"
+//#include "bootloader.h"
 bool dip_switch_update_user(uint8_t index, bool active) {
     switch (index) {
         case 1: 
             // D6 pin is the OS switch  
             if (active) {
                 layer_move(MAC_BASE);
+                /*
+                eeconfig_disable();
+
+                // Jump to bootloader.
+                bootloader_jump();*/
             } else {
                 layer_move(WIN_BASE);
             }
@@ -235,6 +241,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             return true;
     }
+}
+
+
+
+void suspend_power_down_user(void) {
+    // code will run multiple times while keyboard is suspended
+    rgb_matrix_disable_noeeprom();
+}
+
+void suspend_wakeup_init_user(void) {
+    // code will run on keyboard wakeup
+    rgb_matrix_enable_noeeprom();
 }
 
 void keyboard_post_init_user(void) {
