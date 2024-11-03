@@ -52,7 +52,6 @@ __attribute__((weak)) void iton_bt_enters_connection_state(void) {}
  */
 bool iton_bt_is_connected = false;
 uint8_t iton_bt_led_state = 0x00;
-uint32_t iton_rx_counter = 0;
 
 static uint8_t iton_bt_buffer[ITON_BT_BUFFER_LEN];
 uint8_t iton_bt_send_kb_last_key = 0x00;
@@ -162,7 +161,6 @@ static void iton_bt_rx_cb(void *arg) {
                 break;
         }
     }
-    iton_rx_counter ++;
 }
 #endif
 

@@ -17,11 +17,6 @@
  */
 
 #pragma once
-#define SN32_RGB_MATRIX_ROW_PINS { C3, C1, C0, C6, C5, C4, C9, C8, C7, C12, C11, C10, B13, C14, C13, B14, B15, D3 }
+#define SN32F2XX_RGB_MATRIX_ROW_PINS { C3, C1, C0, C6, C5, C4, C9, C8, C7, C12, C11, C10, B13, C14, C13, B14, B15, D3 }
 #define VIA_QMK_RGBLIGHT_ENABLE
 #define ITON_BT_ENABLE_ACK
-
-
-//#define RGB_MATRIX_SAT_STEP 8
-//#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // higher values cause unstability, especially when bluetooth is enabled
-//#define MATRIX_IO_DELAY 120

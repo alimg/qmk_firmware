@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
   [MAC_FN] = LAYOUT_75_iso(
   /*  0           1           2           3           4           5           6           7           8           9           10          11          12          13          14          15         */
-      QK_BOOT,   KC_BRID,    KC_BRIU,    KC_MSSN,    KC_FIND,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,    KC_VOLU,    KC_MSNP,    KC_INS,      KC_INS     ,
+      _______,   KC_BRID,    KC_BRIU,    KC_MSSN,    KC_FIND,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,    KC_VOLU,    KC_MSNP,    KC_INS,      QK_BOOT     ,
       _______,BT_PROFILE1,BT_PROFILE2,BT_PROFILE3,    BT_PAIR,   BT_RESET,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                RGB_M_P    ,
       _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                            _______    ,
       _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                RGB_TOG    ,
@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
   [WIN_FN] = LAYOUT_75_iso(
   /*  0           1           2           3           4           5           6           7           8           9           10          11          12          13          14          15         */
-      QK_BOOT,    KC_BRID,    KC_BRIU,    KC_TASK,    KC_FLXP,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,    KC_VOLU,    _______,    KC_INS,     KC_INS     ,
+      _______,    KC_BRID,    KC_BRIU,    KC_TASK,    KC_FLXP,    RGB_VAD,    RGB_VAI,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MUTE,    KC_VOLD,    KC_VOLU,    _______,    KC_INS,     QK_BOOT     ,
       _______,BT_PROFILE1,BT_PROFILE2,BT_PROFILE3,    BT_PAIR,   BT_RESET,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                RGB_M_P    ,
       _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                            _______    ,
       _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                RGB_TOG    ,

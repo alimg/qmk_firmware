@@ -24,8 +24,10 @@
     "nkro": true,
     "dip_switch": true
   },
-  "processor": "SN32F248BF",
-  "bootloader": "sn32-dfu",
+  "development_board": "sn32f240b_shared_matrix",
+  "bootmagic": {
+    "matrix": [0, 14]
+  },
   "debounce": 5,
   "indicators": {
     "caps_lock": "D4",
@@ -132,7 +134,7 @@
       } 
   },
   "rgb_matrix": {
-    "driver": "sn32f24xb",
+    "driver": "sn32f2xx",
     "layout": [
       { "matrix": [ 0, 0 ], "flags": 4, "x": 7, "y": 0 },
       { "matrix": [ 0, 1 ], "flags": 4, "x": 21, "y": 0 },
@@ -229,13 +231,18 @@
       "solid_color": true,
       "breathing": true,
       "pixel_rain": true,
-      "raindrops": true
+      "raindrops": true,
+      "jellybean_raindrops": true,
+      "splash": true,
+      "multisplash": true,
+      "riverflow": true
     },
     "default": {
       "animation": "solid_color",
       "hue": 16,
       "sat": 160,
       "val": 255
-    }
+    },
+    "sleep": true
   }
 }
