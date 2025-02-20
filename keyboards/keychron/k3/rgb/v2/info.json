@@ -226,13 +226,16 @@
       { "matrix": [ 5, 15 ], "flags": 4, "x": 217, "y": 64 }
     ],
     "animations": {
-      "solid_color": true
+      "solid_color": true,
+      "breathing": true,
+      "pixel_rain": true,
+      "raindrops": true
     },
     "default": {
       "animation": "solid_color",
       "hue": 16,
       "sat": 160,
-      "val": 64
+      "val": 255
     }
   }
 }
